@@ -1,3 +1,6 @@
+/*Binary to decimal 
+Write a program to input a binary number (a sequence of 0-1s) and convert it to decimal. Print the results.*/
+
 #include <iostream>
 #include <cmath>
 

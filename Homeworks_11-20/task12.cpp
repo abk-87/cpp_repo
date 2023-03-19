@@ -1,3 +1,6 @@
+/*Occurence of numbers 
+Write a program which will allow user to input numbers in range 1-10 (as much as the user would like to, till -1 is entered). Calculate and print how many times each of the numbers have been entered.*/
+
 #include <iostream>
 
 int main()

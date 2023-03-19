@@ -1,3 +1,7 @@
+/*Inverse the number
+Write a program which will input an integer number and calculate the inverse of the number. Print the output.
+    E.g. Input 163 - Output 361*/
+
 #include <iostream>
 
 int inverse(int n);

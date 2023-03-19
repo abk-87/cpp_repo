@@ -1,3 +1,8 @@
+/*Decimal to binary
+Write a program to input a number and convert it to binary (e.g in 4 bits)
+    e.g Input 5 , Output 0101
+Enhance the program to support also negative numbers (calculate 2's complement)*/
+
 #include <iostream>
 #include <string>
 

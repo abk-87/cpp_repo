@@ -1,3 +1,19 @@
+/*Draw triangle
+Write a program which will input an integer number - N, and "draw" two types of right-angled triangle of height N.
+    E.g Input 5
+    Output
+    *
+    **
+    ***
+    ****
+    *****
+        *
+       **
+      ***
+     ****
+    *****
+*/
+
 #include <iostream>
 
 void get_triangle_1(int n);

@@ -1,3 +1,7 @@
+/*Prime numbers
+Input a number and check if it is a prime number. Print the answer.
+    3.1 Input number N and print all prime numbers in the range 1-N*/
+
 #include <iostream>
 #include <math.h>
 

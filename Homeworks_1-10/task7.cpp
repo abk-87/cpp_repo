@@ -1,3 +1,20 @@
+/*Draw rectangle
+Write a program which will input two integer - N and M. The program should "draw" a rectangle of NxM size using "*" and spaces.
+    E.g. Input 6 4
+    Output
+    ******
+    *    *
+    *    *
+    ******
+    Enhance the program to input the character to be use for "drawing"
+    E.g. Input 6 4 $
+    
+    $$$$$$
+    $    $
+    $    $
+    $$$$$$
+ */
+
 #include <iostream>
 
 void get_rectangle(int n, int m, char symb = '*')

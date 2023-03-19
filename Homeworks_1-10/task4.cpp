@@ -1,3 +1,7 @@
+/*Palindrome numbers
+Input a number and check if it is a palindrome number. Print the answer.
+    E.g 1789871 is  a palindrome*/
+
 #include <iostream>
 
 int inverse(int n);

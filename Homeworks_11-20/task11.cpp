@@ -1,3 +1,7 @@
+/*Guess a number (roles changed)
+Write a program which asks the user to think a of random number from 1 to 100 and try to guess the number. The user must tell the computer whether the guessed number is too high or too low. 
+Modify the program so that no matter what number the user thinks of (1-100) the computer can guess it in 7 or less guesses.*/
+
 #include <iostream>
 #include <string>
 #include <time.h>

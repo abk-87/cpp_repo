@@ -1,3 +1,6 @@
+/*Power of 2
+Input a number and check if it is a power of 2.*/
+
 #include <iostream>
 
 bool is_power(int n);

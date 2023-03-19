@@ -1,3 +1,7 @@
+/*Concatenate numbers
+Input 2 numbers and concatenate them together 
+    E.g. for 35 and 47 the output number should be 3547*/
+
 #include <iostream>
 
 int get_coefficient(int x);

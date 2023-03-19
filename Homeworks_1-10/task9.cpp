@@ -1,3 +1,17 @@
+/*Draw triangle-2
+Write a program which will input an integer number - N, and "draw" isosceles triangle with base N.
+    E.g. input 5
+        *
+       ***
+      *****
+    Enhance the program to print a triangle of height N.
+           *  
+          *** 
+         *****
+        *******
+       *********
+*/
+
 #include <iostream>
 
 void get_triangle_1(int n);
