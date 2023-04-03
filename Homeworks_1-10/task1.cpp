@@ -3,25 +3,40 @@ Write a program which will input an integer number and will print the sum of the
     E.g. Input 123 - Output 6 (which is 1 + 2 + 3)*/
 
 #include <iostream>
+#include <string>
 
-int get_sum_of_digits(int n);
+bool is_digit(std::string num);
+int get_sum_of_digits(std::string num);
 
 int main()
 {
-	int num;
-	std::cout << "Enter a number: ";
+	std::string num;
+	std::cout << "Enter an integer number: ";
 	std::cin >> num;
+	while (!is_digit(num))
+	{
+		std::cout << "Enter an integer number: ";
+		std::cin >> num;
+	}
 	std::cout << get_sum_of_digits(num) << std::endl;
 	return 0;
 }
 
-int get_sum_of_digits(int n)
+bool is_digit(std::string num)
+{
+	for (int i = 0; i < num.length(); i++)
+	{
+		if (!std::isdigit(num[i])) return false;
+	}
+	return true;
+}
+
+int get_sum_of_digits(std::string num)
 {
 	int sum = 0;
-	while (n > 0)
+	for (int i = 0; i < num.length(); i++)
 	{
-		sum += n % 10;
-		n /= 10;
+		sum += (num[i] - '0');
 	}
 	return sum;
 }

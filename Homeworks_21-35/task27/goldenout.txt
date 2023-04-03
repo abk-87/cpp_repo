@@ -1,0 +1,15 @@
+0 is any integer power of 0: true
+0 is any integer power of 1: false
+1 is any integer power of 0: true
+1 is any integer power of 1: true
+2 is any integer power of 1: false
+64 is any integer power of 4: true
+Representation of 64 in 4-system: 1000
+18 is any integer power of 3: false
+Representation of 18 in 3-system: 200
+70 is any integer power of 7: false
+Representation of 70 in 7-system: 130
+625 is any integer power of 5: true
+Representation of 625 in 5-system: 10000
+4294967295 is any integer power of 9: false
+Representation of 4294967295 in 9-system: 12068657453

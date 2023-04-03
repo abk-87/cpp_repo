@@ -3,25 +3,40 @@ Write a program which will input an integer number and calculate the inverse of 
     E.g. Input 163 - Output 361*/
 
 #include <iostream>
+#include <string>
 
-int inverse(int n);
+bool is_digit(std::string num);
+std::string inverse(std::string num);
 
 int main()
 {
-	int num;
-	std::cout << "Enter a number: ";
+	std::string num;
+	std::cout << "Enter an integer number: ";
 	std::cin >> num;
-	std::cout << inverse(num) << std::endl;
+	while (!is_digit(num))
+	{
+		std::cout << "Enter an integer number: ";
+		std::cin >> num;
+	}
+	std::cout << std::stol(inverse(num)) << std::endl;
 	return 0;
 }
 
-int inverse(int n)
+bool is_digit(std::string num)
 {
-	int inverse_n = 0;
-	while (n > 0)
+	for (int i = 0; i < num.length(); i++)
 	{
-		inverse_n = (inverse_n * 10) + (n % 10);
-		n /= 10;
+		if (!std::isdigit(num[i])) return false;
 	}
-	return inverse_n;
+	return true;
+}
+
+std::string inverse(std::string num)
+{
+	std::string inverse_num = "";
+	for (int i = num.length() - 1; i >= 0; i--)
+	{
+		inverse_num += num[i];
+	}
+	return inverse_num;
 }

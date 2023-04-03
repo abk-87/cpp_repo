@@ -3,13 +3,14 @@ Input a number and check if it is a palindrome number. Print the answer.
     E.g 1789871 is  a palindrome*/
 
 #include <iostream>
+#include <string>
 
 int inverse(int n);
 void is_palindrome(int n, int inverse_n);
 
 int main()
 {
-	int num;
+	std::string num;
 	std::cout << "Enter a number: ";
 	std::cin >> num;
 	is_palindrome(num, inverse(num));

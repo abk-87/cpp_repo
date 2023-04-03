@@ -5,18 +5,34 @@ Input a number and check if it is a prime number. Print the answer.
 #include <iostream>
 #include <math.h>
 
+bool is_digit(std::string num);
 bool is_simple(int n);
 void print(int n);
 void sim_nums_until_N(int n);
 
 int main()
 {
-	int N;
+	std::string num;
 	std::cout << "Enter a number: ";
-	std::cin >> N;
+	std::cin >> num;
+	while (!is_digit(num))
+	{
+		std::cout << "Enter a number: ";
+		std::cin >> num;
+	}
+	int N = std::stoi(num);
 	print(N);
 	sim_nums_until_N(N);
 	return 0;
+}
+
+bool is_digit(std::string num)
+{
+	for (int i = 0; i < num.length(); i++)
+	{
+		if (!std::isdigit(num[i])) return false;
+	}
+	return true;
 }
 
 bool is_simple(int n)
