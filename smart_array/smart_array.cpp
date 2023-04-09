@@ -1,23 +1,37 @@
 #include "smart_array.hpp"
 
-//Doubles capacity if adding a new element makes the array size equal to capacity
+//Increases capacity if adding new element(s) makes array size larger than capacity
 void SmartArray::change_capacity()
 {
-	if (m_capacity == 0)
+	if (m_capacity <= m_size / 2)
 	{
-		m_capacity++;
+		m_capacity = m_size;
+		if (m_capacity == 1)
+		{
+			m_array = new int[m_capacity];
+		}
+		else
+		{
+			array_copy();
+		}
 	}
-	else
+	else if (m_capacity < m_size)
 	{
 		m_capacity *= 2;
-		int* tmp_array = new int[m_capacity];
-		for (int i = 0; i < m_size; i++)
-		{
-			tmp_array[i] = m_array[i];
-		}
-		delete[] m_array;
-		m_array = tmp_array;
+		array_copy();
 	}
+}
+
+//Creates a new array with a new capacity and populates it with the elements of the old array in the same order		
+void SmartArray::array_copy()
+{
+	int* tmp_array = new int[m_capacity];
+	for (int i = 0; i < m_size; i++)
+	{
+		tmp_array[i] = m_array[i];
+	}
+	delete[] m_array;
+	m_array = tmp_array;
 }
 
 //Default constructor
@@ -54,6 +68,12 @@ int SmartArray::get_size()
 	return m_size;
 }
 
+//Returns the size of the storage space currently allocated for the array, expressed in terms of elements
+int SmartArray::get_capacity()
+{
+	return m_capacity;
+}
+
 //Returns whether the vector is empty
 bool SmartArray::empty()
 {
@@ -73,7 +93,7 @@ void SmartArray::clear()
 	m_size = 0;
 }
 
-//Returns the element at position ‘index’ in the array
+//Returns the element at position 'index' in the array
 int SmartArray::get_element(int index)
 {
 	assert(index < m_size && index >= 0 && "Out of range. Incorrect index."); 
@@ -98,10 +118,7 @@ int SmartArray::get_back()
 void SmartArray::push_back(int num)
 {
 	m_size++;
-	if (m_size >= m_capacity)
-	{
-		change_capacity();
-	}
+	change_capacity();
 	m_array[m_size - 1] = num;
 }
 
@@ -130,10 +147,7 @@ void SmartArray::insert(int index, int num)
 	}
 	
 	m_size++;
-	if (m_size > m_capacity)
-	{
-		change_capacity();
-	}
+	change_capacity();
 	for (int i = m_size - 1; i > index; i--)
 	{
 		m_array[i] = m_array[i - 1];
@@ -171,14 +185,7 @@ void SmartArray::resize(int size, int value)
 	{
 		int tmp = m_size;
 		m_size = size;
-		if (m_capacity < m_size / 2)
-		{
-			m_capacity = m_size;
-		}
-		else
-		{
-			change_capacity();
-		}
+		change_capacity();
 		for (int i = tmp; i < m_size; i++)
 		{
 			m_array[i] = value;
@@ -190,10 +197,18 @@ void SmartArray::resize(int size, int value)
 void SmartArray::assign(int size, int value)
 {
 	m_size = size;
-	m_capacity = size;
-	for (int i = 0; i < m_size; i++)
+	if (m_capacity < m_size)
 	{
-		m_array[i] = value;
+		m_capacity = m_size;
+		delete[] m_array;
+		m_array = new int[m_capacity]{value};
+	}
+	else
+	{
+		for (int i = 0; i < m_size; i++)
+		{
+			m_array[i] = value;
+		}
 	}
 }
 
@@ -201,7 +216,12 @@ void SmartArray::assign(int size, int value)
 void SmartArray::assign(int start, int end, const SmartArray& array)
 {
 	m_size = end - start;
-	m_capacity = m_size;
+	if (m_capacity < m_size)
+	{
+		m_capacity = m_size;
+		delete[] m_array;
+		m_array = new int[m_capacity];
+	}
 	int i = 0;
 	for (int j = start; j < end; j++)
 	{
@@ -214,7 +234,12 @@ void SmartArray::assign(int start, int end, const SmartArray& array)
 void SmartArray::assign(const std::initializer_list <int>& list)
 {
 	m_size = list.size();
-	m_capacity = m_size;
+	if (m_capacity < m_size)
+	{
+		m_capacity = m_size;
+		delete[] m_array;
+		m_array = new int[m_capacity];
+	}
 	int i = 0;
 	for (int element : list)
 	{

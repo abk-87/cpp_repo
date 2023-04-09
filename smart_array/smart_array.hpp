@@ -8,8 +8,11 @@ private:
 	int m_size;
 	int m_capacity;
 	
-	//Doubles capacity if adding a new element makes the array size equal to capacity
+	//Increases capacity if adding new element(s) makes array size larger than capacity
 	void change_capacity();
+	
+	//Creates a new array with a new capacity and populates it with the elements of the old array in the same order
+	void array_copy();
 public:
 	//Default constructor
 	SmartArray();
@@ -19,7 +22,10 @@ public:
 	SmartArray(const SmartArray& array);
 	
 	//Returns the number of elements in the array
-	int get_size();	
+	int get_size();
+	
+	//Returns the size of the storage space currently allocated for the array, expressed in terms of elements
+	int get_capacity();
 	
 	//Returns whether the vector is empty
 	bool empty();
