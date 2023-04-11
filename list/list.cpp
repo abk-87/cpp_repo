@@ -1,6 +1,6 @@
 #include "list.hpp"
 
-List::Node::Node(int data)
+Node::Node(int data)
 {
 	this->data = data;
 	next = nullptr;
@@ -9,17 +9,18 @@ List::Node::Node(int data)
 List::List()
 {
 	first = nullptr;
+	size = 0;
 }
 	
 int List::get_size()
 {
-	int size = 0;
+	/*int size = 0;
 	Node* n = first;
 	while (n != nullptr)
 	{
 		size++;
 		n = n->next;
-	}
+	}*/
 	return size;
 }
 
@@ -48,12 +49,35 @@ void List::push_back(int data)
 		}
 		n->next = element;
 	}
+	size++;
+}
+
+void List::insert(int position, int data)
+{
+	assert(position >= 0 && position <= size && "Out of range. Incorrect index.");
+	Node* element = new Node(data);
+	if (position == 0)
+	{
+		element->next = first;
+		first = element;
+	}
+	else
+	{
+		Node* n = first;
+		for (int i = 0; i < position - 1; i++)
+		{
+			n = n->next;
+		}
+		element->next = n->next;
+		n->next = element;
+	}
+	size++;
 }
 
 int List::pop_back()
 {
-	int s = get_size();
-	if (s > 1)
+	assert(size > 0 && "The list is empty. No element to remove");
+	if (size > 1)
 	{
 		Node* n = first;
 		Node* n_prev;
@@ -65,14 +89,122 @@ int List::pop_back()
 		int d = n->data;
 		delete n;
 		n_prev->next = nullptr;
+		size--;
 		return d;
 	}
-	else if (s == 1)
+	else if (size == 1)
+	{
+		delete first;
+		first = nullptr;
+		size--;
+	}
+	return 0;
+}
+
+int List::remove_by_index(int position)
+{
+	assert(size > 0 && "The list is empty. No element to remove.");
+	assert(position >= 0 && position < size && "Out of range. Incorrect index.");
+	int d = first->data;
+	if (size == 1)
 	{
 		delete first;
 		first = nullptr;
 	}
-	return 0;
+	else if (position == 0)
+	{
+		Node* n = first->next;
+		delete first;
+		first = n;
+	}
+	else
+	{
+		Node* n = first;
+		Node* n_prev;
+		for(int i = 0; i < position; i++)
+		{
+			n_prev = n;
+			n = n->next;
+		}
+		d = n->data;
+		n_prev->next = n->next;
+		delete n;
+	}
+	size--;
+	return d;
+}
+
+void List::remove_by_value(int data, int flag)
+{
+	assert(size > 0 && "The list is empty. No element to remove.");
+	assert(flag == 0 || flag == 1 && "Incorrect flag");
+	
+	int s = size;
+	Node* n = first->next;	
+	if (flag == 0)
+	{
+		if (first->data == data)
+		{
+			delete first;
+			first = n;
+			size--;
+			return;
+		}
+
+		else
+		{
+			Node* n_prev = first; 
+			for (int i = 1; i < size; i++)
+			{
+				if (n->data == data)
+				{
+					n_prev->next = n->next;
+					delete n;
+					size--;
+					return;
+				}
+				else
+				{
+					n_prev = n;
+				       	n = n->next;
+				}
+			}
+		}
+	}
+
+	else if (flag == 1)
+	{
+		while (size > 0 && first->data == data)
+		{
+			delete first;
+			first = n;
+			size--;
+			if (first != nullptr)
+			{
+				n = first->next;
+			}
+		}
+
+		if (size > 1)
+		{
+			Node* n_prev = first;
+			for (int i = 1; i < size; i++)
+			{
+				if (n->data == data)
+				{
+					n_prev->next = n->next;
+					delete n;
+					size--;
+					n_prev = n;
+					n = n->next;
+				}
+			}
+		}
+	}
+	if (s == size)
+	{
+		std::cout << "Element with value " << data << " does not exist in the list" << std::endl;
+	}
 }
 
 void List::print()
@@ -88,6 +220,7 @@ void List::print()
 
 int& List::operator[](int position)
 {
+	assert(position >= 0 && position < size && "Out of range. Incorrect index.");
 	Node* n = first;
 	for (int i = 0; i < position; i++)
 	{
