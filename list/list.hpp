@@ -66,6 +66,9 @@ public:
 	//Argument:
 	//position - position of an element in the List object. It must not be less than 0 and greater or equal to the List object size. Otherwise the function throws exception.
 	int& operator[](int position);
+	
+	//Returns a Boolean value indicating whether the List object is a copy of another List object.
+	bool operator!=(const List& lst);
 
 	//Destructor. Destroys the List object with all its elements.
 	~List();
