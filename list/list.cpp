@@ -21,7 +21,6 @@ List::List()
 //lst - another List object of the same type (with the same class template arguments), whose contents are either copied.
 List::List(const List& lst)
 {
-	assert(this != &lst);
 	m_size = 0;
 	m_first = nullptr;
 	
@@ -48,7 +47,7 @@ List::List(const List& lst)
 		this->push_back(n_lst->data);
 		n_lst = n_lst->next;
 	}
-
+	assert(this != &lst);
 }
 
 //Returns the number of elements in the List object.
@@ -285,25 +284,7 @@ int& List::operator[](int position)
 //Returns a Boolean value indicating whether the List object is a copy of another List object.
 bool List::operator!=(const List& lst)
 {
-	if (this->m_size == lst.m_size)
-	{
-		
-		Node* n = this->m_first;
-		Node* n_arg = lst.m_first;
-		for (int i = 0; i < this->m_size; i++)
-		{
-			if (n->data != n_arg->data)
-			{
-				n = n->next;
-				n_arg = n_arg->next;
-			}
-			else
-			{
-				return false;
-			}
-		}
-	}
-	return true;
+	return this != &lst;
 }
 
 //Destructor. Destroys the List object with all its elements.

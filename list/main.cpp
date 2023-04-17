@@ -83,5 +83,9 @@ int main()
 	List list2(list);
 	//55 66 77 88 99
 	assert(list2.get_size() == 5 && list[0] == 55 && list[1] == 66 && list[2] == 77 && list[3] == 88 && list[4] == 99);
+
+	list2.insert(0, 44);
+	list.print();
+	list2.print();
 	return 0;
 }
