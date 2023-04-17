@@ -294,6 +294,11 @@ bool List::operator!=(const List& lst)
 		{
 			if (n->data == n_arg->data)
 			{
+				n = n->next;
+				n_arg = n_arg->next;
+			}
+			else
+			{
 				return false;
 			}
 		}
