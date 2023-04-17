@@ -292,7 +292,7 @@ bool List::operator!=(const List& lst)
 		Node* n_arg = lst.m_first;
 		for (int i = 0; i < this->m_size; i++)
 		{
-			if (n->data == n_arg->data)
+			if (n->data != n_arg->data)
 			{
 				n = n->next;
 				n_arg = n_arg->next;
