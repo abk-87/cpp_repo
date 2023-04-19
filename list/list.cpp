@@ -118,6 +118,7 @@ void List::insert(int position, int data)
 int List::pop_back()
 {
 	assert(m_size > 0 && "The list is empty. No element to remove");
+	int d = 0;
 	if (m_size > 1)
 	{
 		Node* n = m_first;
@@ -127,19 +128,18 @@ int List::pop_back()
 			n_prev = n;
 			n = n->next;
 		}
-		int d = n->data;
+		d = n->data;
 		delete n;
 		n_prev->next = nullptr;
-		m_size--;
-		return d;
 	}
 	else if (m_size == 1)
 	{
+		d = m_first->data;
 		delete m_first;
 		m_first = nullptr;
-		m_size--;
 	}
-	return 0;
+	m_size--;
+	return d;
 }
 
 //Removes from the List object a single element from the specified position, reducing the List object size by one. If the List object is empty, the function throws exception. If the element to be removed is not the first or last element in the list, the element preceding the element to be removed receives a link to the element following the element to be removed․ Тhe function returns the value of the element being removed.

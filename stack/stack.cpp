@@ -61,23 +61,20 @@ void Stack::push(int data)
 int Stack::pop()
 {
 	assert(m_size > 0 && "The stack is empty. No element to remove");
+	int d = m_top->data;
 	if (m_size > 1)
-	{
-				
-		int d = m_top->data;
+	{				
 		Node* n = m_top;
 		m_top = m_top->link;
 		delete n;
-		m_size--;
-		return d;
 	}
 	else if (m_size == 1)
 	{
 		delete m_top;
 		m_top = nullptr;
-		m_size--;
 	}
-	return 0;
+	m_size--;
+	return d;
 }
 
 //Destructor. Destroys the Stack object with all its elements.

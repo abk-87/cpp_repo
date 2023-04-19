@@ -70,24 +70,21 @@ void Queue::push(int data)
 int Queue::pop()
 {
 	assert(m_size > 0 && "The queue is empty. No element to remove");
+	int d = m_front->data;
 	if (m_size > 1)
-	{
-				
-		int d = m_front->data;
+	{				
 		Node* n = m_front;
 		m_front = m_front->link;
 		delete n;
-		m_size--;
-		return d;
 	}
 	else if (m_size == 1)
 	{
 		delete m_front;
 		m_front = nullptr;
 		m_back = nullptr;
-		m_size--;
 	}
-	return 0;
+	m_size--;
+	return d;
 }
 
 //Destructor. Destroys the Queue object with all its elements.
