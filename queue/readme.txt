@@ -8,4 +8,4 @@ The container queue supports the following operations:
 -push - inserts a new element at the end of the queue;
 -pop - removes the first element in the queue.
 
-To run the program, you need to download the "main.cpp", "queue.cpp", "queue.hpp" and "Makefile" files to the computer, place them in the same directory, and then run the "Makefile" through the terminal using the command "make". Use the command "make clean" to remove the intermediate files and the executable file "queue" created as a result of program compilation.
+To compile and run the program, you need to enter the command "make" in the terminal. Use the command "make clean" to remove the intermediate files and the executable file "queue" created as a result of program compilation.

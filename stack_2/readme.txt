@@ -7,4 +7,4 @@ The container stack supports the following operations:
 -push - inserts a new element at the top of the stack;
 -pop - removes the element on top of the stack.
 
-To run the program, you need to download the "main.cpp", "stack.cpp", "stack.hpp" and "Makefile" files to the computer, place them in the same directory, and then run the "Makefile" through the terminal using the command "make". Use the command "make clean" to remove the intermediate files and the executable file "stack" created as a result of program compilation.
+To compile and run the program, you need to enter the command "make" in the terminal. Use the command "make clean" to remove the intermediate files and the executable file "stack" created as a result of program compilation.
