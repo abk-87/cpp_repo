@@ -148,7 +148,66 @@ public:
 		m_size--;
 		return back_value;
 	}
-	
+
+	//Extendedes by inserting new element before the element at the specified position, increasing the List object size by one. Тhe element previously at specified position receives a link to the new element, and the new element receives a link to the element referenced by the element previously at specified position.
+	//Arguments:
+	//position - position (index) in the List object where the new element is inserted. It must not be less than 0 and greater than the List object current size. Otherwise the function throws exception.
+	//data - value to be copied to the inserted element.
+	void insert(int position, T data)
+	{
+		assert(position >= 0 && position <= m_size && "Out of range. Incorrect index.");
+		if (position == 0)
+		{
+			push_front(data);
+		}
+		else if (position == m_size)
+		{
+			push_back(data);
+		}
+		else
+		{
+			Node<T>* element = new Node(data);
+                        Node<T>* n = nullptr;
+			if (position <= m_size / 2)
+			{
+				n = m_front;
+				for (int i = 1; i < position; i++)
+				{
+					n = n->next;
+				}
+			}
+			else
+			{
+				n = m_back;
+				for (int i = m_size - 1; i >= position; i--)
+				{
+					n = n->prev;
+				}
+			}	
+			element->prev = n;
+			element->next = n->next;
+			n->next->prev = element;
+			n->next = element;
+			m_size++;
+		}
+	}
+
+	//Reverses the order of the elements in the List object.
+	void reverse()
+	{
+		T tmp;
+		Node<T>* n1 = m_front;
+		Node<T>* n2 = m_back;
+		for (int i = 0; i < m_size / 2; i++)
+		{
+			tmp = n1->data;
+			n1->data = n2->data;
+			n2->data = tmp;
+			n1 = n1->next;
+			n2 = n2->prev;
+		}
+	}
+
 	//Outputs the values of the elements of the List object separated by a space.
 	void print()
 	{
@@ -159,6 +218,32 @@ public:
 			n = n->next;
 		}
 		std::cout << std::endl;
+	}
+	
+	//Returns a reference to the element at specified position in the List object. Allows to assign a new value to the element.
+	//Argument:
+	//position - position of an element in the List object. It must not be less than 0 and greater or equal to the List object size. Otherwise the function throws exception.
+	T& operator[](int position)
+	{
+		assert(position >= 0 && position < m_size && "Out of range. Incorrect index.");
+		Node<T>* n;
+		if (position <= m_size / 2)
+		{
+			n = m_front;
+			for (int i = 0; i < position; i++)
+			{
+				n = n->next;
+			}
+		}
+		else
+		{
+			n = m_back;
+			for (int i = m_size - 1; i > position; i--)
+			{
+				n = n->prev;
+			}
+		}
+		return n->data;
 	}
 	
 	//Destructor. Destroys the List object with all its elements.

@@ -12,13 +12,16 @@ int main()
 	assert(list.is_empty() == 0 && list.front() == 10 && list.back() == 20);
 
 	list.push_front(30);
-	assert(list.get_size() == 3 && list.front() == 30 && list.back() == 20);
-	
+	assert(list.get_size() == 3 && list[0] == 30 && list[1] == 10 && list[2] == 20);
+
+	list[1] = 50;
+	assert(list[1] == 50);
+
 	list.pop_front();
-	assert(list.get_size() == 2 && list.front() == 10 && list.back() == 20);
+	assert(list.get_size() == 2 && list.front() == 50 && list.back() == 20);
 
 	list.pop_back();
-	assert(list.get_size() == 1 && list.front() == 10 && list.back() == 10);
+	assert(list.get_size() == 1 && list.front() == 50 && list.back() == 50);
 
 	list.pop_front();
 	assert(list.is_empty() == 1);
@@ -38,13 +41,21 @@ int main()
 	//fff ddd bbb aaa ccc eee ggg
 	list2.print();
 
+	list2.reverse();
+	//ggg eee ccc aaa bbb ddd fff
+	list2.print();
+
 	list2.pop_front();
 	list2.pop_back();
-	assert(list2.get_size() == 5 && list2.front() == "ddd" && list2.back() == "eee");
+	assert(list2.get_size() == 5 && list2.front() == "eee" && list2.back() == "ddd");
 
 	list2.front() = "first";
 	list2.back() = "last";
-	//first bbb aaa ccc last
+	//first ccc aaa bbb last
+	list2.print();
+
+	list2.insert(1, "ddd");
+	list2.insert(5, "eee");
 	list2.print();
 
 	//char
@@ -60,7 +71,9 @@ int main()
 	list3.push_back('r');
 	list3.push_back('l');
 	list3.push_back('d');
-	list3.push_back('!');
+	list3.insert(11, '!');
+	list3.print();
+	list3.reverse();
 	list3.print();
 	return 0;
 }
