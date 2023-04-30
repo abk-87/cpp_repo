@@ -10,6 +10,7 @@ The container list supports the following operations:
 -pop_front - removes the first element of the list;
 -pop_back - removes the last element of the list;
 -insert - inserts a new element before the element at the specified position;
--reverse - reverses the order of the elements.
+-reverse - reverses the order of the elements;
+-bubble_sort/insertion_sort - sorts the elements in the List object in ascending order.
 
 To compile and run the program, you need to enter the command "make" in the terminal. Use the command "make clean" to remove the intermediate files and the executable file "stack" created as a result of program compilation.

@@ -57,6 +57,9 @@ int main()
 	list2.insert(1, "ddd");
 	list2.insert(5, "eee");
 	list2.print();
+	list2.bubble_sort();
+	//aaa bbb ccc ddd eee first last
+	list2.print();
 
 	//char
 	List<char> list3;
@@ -74,6 +77,8 @@ int main()
 	list3.insert(11, '!');
 	list3.print();
 	list3.reverse();
+	list3.print();
+	list3.insertion_sort();
 	list3.print();
 	return 0;
 }

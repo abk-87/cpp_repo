@@ -25,9 +25,48 @@ template <typename T>
 class List
 {
 private:
-	Node<T>* m_front;  //The first element of the List object.
-	Node<T>* m_back;   //The last element of the List object.
+	Node<T>* m_front;  //Pointer to the first element of the List object.
+	Node<T>* m_back;   //Pointer to the last element of the List object.
 	int m_size;        //Number of elements in the List object.
+
+	//Exchanges values of two objects.
+	//Arguments:
+	//a, b - two objects, whose contents are swapped.
+	void data_swap(T& a, T& b)
+	{
+		T tmp;
+		tmp = a;
+		a = b;
+		b = tmp;
+	}
+	
+	//Swaps two consecutive elements (nodes) of a List object. If the first or last elements of the List object are changed as a result of the swap, the fields 'm_front' and 'm_back' refer to the changed first and last elements respectively.
+	//Arguments:
+	//n1, n2 - two consecutive elements to be swapped.
+	void node_swap(Node<T>* n1, Node<T>* n2)
+	{
+		n1->next = n2->next;
+		if (n1->prev != nullptr)
+		{
+			n1->prev->next = n2;
+		}
+		n2->prev = n1->prev;
+		n1->prev = n2;
+		if (n2->next != nullptr)
+		{
+			n2->next->prev = n1;
+		}
+		n2->next = n1;
+
+		if (n2->prev == nullptr)
+		{
+			m_front = n2;
+		}
+		else if (n1->next == nullptr)
+		{
+			m_back = n1;
+		}
+	}
 public:
 	//Default constructor. Constructs an empty List object, with no elements.
 	List()
@@ -200,9 +239,7 @@ public:
 		Node<T>* n2 = m_back;
 		for (int i = 0; i < m_size / 2; i++)
 		{
-			tmp = n1->data;
-			n1->data = n2->data;
-			n2->data = tmp;
+			data_swap(n1->data, n2->data);
 			n1 = n1->next;
 			n2 = n2->prev;
 		}
@@ -219,7 +256,99 @@ public:
 		}
 		std::cout << std::endl;
 	}
+
+	//Sorts the elements in the List object in ascending order using the bubble sort method, changing their position in the container. Equivalent elements retain the relative order.
+	void bubble_sort()
+	{
+		//Option 1, sorting through data swap
+		Node<T>* n;
+		T tmp;
+		for (int i = 0; i < m_size - 1; i++)
+		{
+			n = m_front;
+			for (int j = 0; j < m_size - i - 1; j++)
+			{
+				if (n->data > n->next->data)
+				{
+					data_swap(n->data, n->next->data);
+				}
+				n = n->next;
+			}
+		}
+		
+		//Option 2, sorting through node swap
+		/*
+		Node<T>* n1;
+		Node<T>* n2;
+		for (int i = 0; i < m_size - 1; i++)
+		{
+			n1 = m_front;
+			n2 = m_front->next;
+			for (int j = 0; j < m_size - i - 1; j++)
+			{
+				if (n1->data > n2->data)
+				{
+					node_swap(n1, n2);
+					n2 = n1->next;
+				}
+				else
+				{
+					n1 = n2;
+					n2 = n1->next;
+				}
+			}
+		}
+		*/
+	}
 	
+	//Sorts the elements in the List object in ascending order using the insertion sort method, changing their position in the container. Equivalent elements retain the relative order.
+	void insertion_sort()
+	{
+		//Option 1, sorting through data swap
+		Node<T>* n1 = m_front->next;
+		Node<T>* n2;
+		T tmp;
+		for (int i = 1; i < m_size; i++)
+		{
+			n2 = n1;
+			while (n2->prev)
+			{
+				if (n2->data < n2->prev->data)
+				{
+					data_swap(n2->data, n2->prev->data);
+				}
+				n2 = n2->prev;
+			}
+			n1 = n1->next;			
+		}
+
+		//Option 2, sorting through node swap
+		/*
+		Node<T>* n = m_front->next;
+		Node<T>* n1;
+		Node<T>* n2;
+		while (n)
+		{
+			n1 = n->prev;
+			n2 = n;
+			while (n1)
+			{
+				if (n1->data > n2->data)
+				{
+					node_swap(n1, n2);
+					n1 = n2->prev;
+				}
+				else
+				{
+					n2 = n1;
+					n1 = n2->prev;
+				}
+			}
+			n = n->next;
+		}
+		*/
+	}
+
 	//Returns a reference to the element at specified position in the List object. Allows to assign a new value to the element.
 	//Argument:
 	//position - position of an element in the List object. It must not be less than 0 and greater or equal to the List object size. Otherwise the function throws exception.
