@@ -111,12 +111,12 @@ public:
 	{
 		if (m_size == 0)
 		{
-			m_front = new Node(data);
+			m_front = new Node<T>(data);
 			m_back = m_front;
 		}
 		else
 		{
-			Node<T>* element = new Node(data);
+			Node<T>* element = new Node<T>(data);
 			m_front->prev = element;
 			element->next = m_front;
 			m_front = element;
@@ -131,12 +131,12 @@ public:
 	{
 		if (m_size == 0)
 		{
-			m_back = new Node(data);
+			m_back = new Node<T>(data);
 			m_front = m_back;
 		}
 		else
 		{
-			Node<T>* element = new Node(data);
+			Node<T>* element = new Node<T>(data);
 			m_back->next = element;
 			element->prev = m_back;
 			m_back = element;
@@ -205,7 +205,7 @@ public:
 		}
 		else
 		{
-			Node<T>* element = new Node(data);
+			Node<T>* element = new Node<T>(data);
                         Node<T>* n = nullptr;
 			if (position <= m_size / 2)
 			{
